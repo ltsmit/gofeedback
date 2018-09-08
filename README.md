@@ -49,12 +49,12 @@ A rewrite of the CopyFile example of the draft design to this proposal:
 ```go
 func CopyFile(src, dst string) error {
 
-	r := os.Open!(src)
+	r, _ := os.Open!(src)
 	defer r.Close!()
 
-	w := os.Create!(dst)
+	w, _ := os.Create!(dst)
 
-	check io.Copy(w, r)
+	err := io.Copy(w, r)
 	if err!= nil {
 		w.Close() // no ! added, because of return in generated code
 		os.Remove(dst)
