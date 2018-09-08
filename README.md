@@ -45,3 +45,22 @@ If err != nil {
 It does not help to move this code to a ‘generic’ handler on a different place in the program, because this code is not generic, but specific for this error. Moving it to a handler on a different location makes it more difficult to understand the program.
 
 A rewrite of the CopyFile example of the draft design to this proposal:
+
+```go
+func CopyFile(src, dst string) error {
+
+	r := os.Open!(src)
+	defer r.Close!()
+
+	w := os.Create!(dst)
+
+	check io.Copy(w, r)
+	if err!= nil {
+		w.Close() // no ! added, because of return in generated code
+		os.Remove(dst)
+	}
+
+	w.Close!()
+	return nil
+}
+```
