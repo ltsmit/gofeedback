@@ -1,4 +1,4 @@
-# Generate error reporting by Go toolchain
+# Generate code for error reporting by Go toolchain
 Go 2 draft designs Error Handling feedback
 
 Let us first start to distinguish between different use of errors:
